@@ -1,4 +1,4 @@
-package question1;
+ package question1;
 
 public class PatternObservateur extends junit.framework.TestCase {
 
@@ -29,7 +29,17 @@ public class PatternObservateur extends junit.framework.TestCase {
         l1.insert(" 1 ");
         // vérifier que les deux observateurs ont bien été notifiés avec les
         // bons paramètres
-
+        assertFalse(o1.senders().empty());
+        assertFalse(o2.senders().empty());
+        assertEquals(l1, o1.senders().pop());  
+        assertEquals(l1, o2.senders().pop());  
+        assertEquals(l1, o1.senders().pop());  
+        assertEquals(l1, o2.senders().pop());  
+        assertEquals(" 1 ", o1.arguments().pop()); 
+        assertEquals(" 1 ", o2.arguments().pop()); 
+        assertEquals("test", o1.arguments().pop()); 
+        assertEquals("test", o2.arguments().pop()); 
+      
         // à compléter !!
 
         // ne pas modifier ces lignes, dernières assertions vraies de cette
@@ -53,7 +63,21 @@ public class PatternObservateur extends junit.framework.TestCase {
 
         // à compléter à partir de la ligne 56
         // vérifier que l'observateur a bien été notifié par les deux listes
+        assertEquals(l2, o.senders().pop()); 
+        assertEquals(l2, o.senders().pop()); 
+        assertEquals(l1, o.senders().pop());   
+        assertEquals(l1, o.senders().pop());  
 
+        
+
+
+        assertEquals(" B ", o.arguments().pop()); 
+        assertEquals("testB", o.arguments().pop());   
+        assertEquals(" A ", o.arguments().pop()); 
+        assertEquals("testA", o.arguments().pop()); 
+
+
+        
         // à compléter !!
 
         // ne pas modifier cette ligne, dernière assertion vraie de cette
@@ -77,7 +101,11 @@ public class PatternObservateur extends junit.framework.TestCase {
         // et deleteObservers()
 
         // à compléter !!
-
+         assertTrue(l1.countObservers() == 2);
+         assertTrue(l2.countObservers() == 2);
+         l1.deleteObserver(o1);
+         l1.deleteObserver(o2);
+         l2.deleteObservers();
         // ne pas modifier ces lignes, dernières assertions vraies de cette
         // méthode
         assertTrue(o1.senders().empty());
